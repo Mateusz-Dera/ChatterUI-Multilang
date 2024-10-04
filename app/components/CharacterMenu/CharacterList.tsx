@@ -19,6 +19,9 @@ import CharacterListing from './CharacterListing'
 import CharacterNewMenu from './CharacterNewMenu'
 import CharactersEmpty from './CharactersEmpty'
 
+import React from 'react';
+import { Trans } from 'react-i18next'
+
 enum SortType {
     RECENT_ASC,
     RECENT_DESC,
@@ -85,7 +88,7 @@ const SortButton: React.FC<SortButtonProps> = ({ sortTypes, currentSortType, lab
                 />
             )}
             <Text style={isCurrent ? styles.sortButtonTextActive : styles.sortButtonText}>
-                {label}
+                <Trans>{label}</Trans>
             </Text>
         </TouchableOpacity>
     )
@@ -157,7 +160,7 @@ const CharacterList: React.FC<CharacterListProps> = ({ showHeader }) => {
                                 alignItems: 'center',
                             }}>
                             <Text style={{ color: Style.getColor('primary-text2'), fontSize: 16 }}>
-                                Sort By
+                                <Trans>Sort by</Trans>
                             </Text>
                             <SortButton
                                 sortTypes={[SortType.RECENT_ASC, SortType.RECENT_DESC]}

@@ -21,6 +21,9 @@ import {
 } from 'react-native'
 import { useShallow } from 'zustand/react/shallow'
 
+import React from 'react'
+import { Trans } from 'react-i18next'
+
 const CharInfo = () => {
     const router = useRouter()
     const { currentCard, setCurrentCard, charId, charName, unloadCharacter } =
@@ -172,7 +175,7 @@ const CharInfo = () => {
                         </View>
 
                         <Text style={styles.boxText}>
-                            Description Tokens:{' '}
+                            <Trans>Description Tokens:</Trans>{' '}
                             {getTokenCount(characterCard?.data?.description ?? '')}
                         </Text>
 
@@ -193,7 +196,7 @@ const CharInfo = () => {
                             />
                         </ScrollView>
 
-                        <Text style={styles.boxText}>First Message</Text>
+                        <Text style={styles.boxText}><Trans>First Message</Trans></Text>
                         <ScrollView
                             keyboardShouldPersistTaps="handled"
                             style={styles.inputContainer}>

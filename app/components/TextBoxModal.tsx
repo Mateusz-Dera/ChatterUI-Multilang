@@ -13,6 +13,9 @@ import {
     Platform,
 } from 'react-native'
 
+import React from 'react'
+import { Trans } from 'react-i18next'
+
 type TextBoxModalProps = {
     booleans: [boolean, (b: boolean) => void]
     onConfirm: (text: string) => void
@@ -67,7 +70,7 @@ const TextBoxModal: React.FC<TextBoxModalProps> = ({
                     justifyContent: 'center',
                 }}>
                 <View style={styles.modalview}>
-                    <Text style={styles.title}>{title}</Text>
+                    <Text style={styles.title}><Trans>{title}</Trans></Text>
                     <View style={styles.inputContainer}>
                         <TextInput
                             style={styles.input}
@@ -93,7 +96,7 @@ const TextBoxModal: React.FC<TextBoxModalProps> = ({
                     {showError && <Text style={styles.errorMessage}>{errorMessage}</Text>}
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity style={styles.cancelButton} onPress={() => handleClose()}>
-                            <Text style={{ color: Style.getColor('primary-text1') }}>Cancel</Text>
+                            <Text style={{ color: Style.getColor('primary-text1') }}><Trans>Cancel</Trans></Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={styles.confirmButton}
@@ -105,7 +108,7 @@ const TextBoxModal: React.FC<TextBoxModalProps> = ({
                                 onConfirm(text)
                                 handleClose()
                             }}>
-                            <Text style={{ color: Style.getColor('primary-text1') }}>Confirm</Text>
+                            <Text style={{ color: Style.getColor('primary-text1') }}><Trans>Confirm</Trans></Text>
                         </TouchableOpacity>
                     </View>
                 </View>

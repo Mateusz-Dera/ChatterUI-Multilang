@@ -1,7 +1,6 @@
 import { rawdb } from '@db'
 import { copyFile, DocumentDirectoryPath, DownloadDirectoryPath } from '@dr.pogodin/react-native-fs'
 import { Style, AppSettings, Logger, Characters } from '@globals'
-import appConfig from 'app.config'
 import { reloadAppAsync } from 'expo'
 import { getDocumentAsync } from 'expo-document-picker'
 import { documentDirectory, copyAsync, deleteAsync } from 'expo-file-system'
@@ -9,8 +8,9 @@ import { Stack, useRouter } from 'expo-router'
 import React from 'react'
 import { StyleSheet, Text, View, Switch, TouchableOpacity, Alert, ScrollView } from 'react-native'
 import { useMMKVBoolean } from 'react-native-mmkv'
+import { Trans, useTranslation } from 'react-i18next'
 
-const appVersion = appConfig.expo.version
+const appVersion = `${require(`../app.json`).expo.version}`
 
 type SwitchComponentProps = {
     title: string
@@ -38,17 +38,17 @@ const SwitchComponent: React.FC<SwitchComponentProps> = ({ title, value, onValue
                     marginLeft: 16,
                     color: Style.getColor(value ? 'primary-text1' : 'primary-text3'),
                 }}>
-                {title}
+                <Trans>{title}</Trans>
             </Text>
         </View>
     )
 }
 
-const WarningAlert = (title: string, description: string, onPress: () => void) => {
+const WarningAlert = (title: string, description: string, cancel: string, confirm: string, onPress: () => void) => {
     Alert.alert(title, description, [
-        { text: `Cancel`, style: `cancel` },
+        { text: cancel, style: `cancel` },
         {
-            text: `Confirm`,
+            text: confirm,
             style: `destructive`,
             onPress: onPress,
         },
@@ -66,7 +66,7 @@ const exportDB = async () => {
         .catch((e) => Logger.log('Failed to copy database: ' + e, true))
 }
 
-const importDB = async (uri: string, name: string) => {
+const importDB = async (uri: string, name: string, title: string, message: string, cancel: string, confirm: string) => {
     const copyDB = async () => {
         rawdb.closeSync()
         await exportDB()
@@ -81,17 +81,21 @@ const importDB = async (uri: string, name: string) => {
             reloadAppAsync()
         })
     }
+
     const dbAppVersion = name.split('-')[0]
     if (dbAppVersion !== appVersion) {
         WarningAlert(
-            'WARNING: Different Version',
-            `The imported database file has a different app version (${dbAppVersion}) than installed (${appVersion}), this may break or corrupt the database. It is recommended to use the same app version.`,
+            title,
+            message.replace('${dbAppVersion}', dbAppVersion).replace('${appVersion}', appVersion),
+            cancel,
+            confirm,
             copyDB
         )
     } else copyDB()
 }
 
 const AppSettingsMenu = () => {
+    const { t } = useTranslation()
     const router = useRouter()
     //const [animateEditor, setAnimateEditor] = useMMKVBoolean(AppSettings.AnimateEditor)
     const [saveKV, setSaveKV] = useMMKVBoolean(AppSettings.SaveLocalKV)
@@ -104,9 +108,9 @@ const AppSettingsMenu = () => {
 
     return (
         <ScrollView style={styles.mainContainer}>
-            <Stack.Screen options={{ title: 'App Settings' }} />
+            <Stack.Screen options={{ title: t('App Settings') }} />
 
-            <Text style={{ ...styles.sectionTitle, paddingTop: 0 }}>Style</Text>
+            <Text style={{ ...styles.sectionTitle, paddingTop: 0 }}><Trans>Style</Trans></Text>
             {/* Removed as this animation is buggy on Samsung devices, now defaults to no animation */}
             {/*<SwitchComponent
                 title="Animate Editor"
@@ -124,13 +128,13 @@ const AppSettingsMenu = () => {
                 onPress={() => {
                     router.push('/ColorSettings')
                 }}>
-                <Text style={styles.buttonText}>Customize Colors</Text>
+                <Text style={styles.buttonText}><Trans>Customize Colors</Trans></Text>
             </TouchableOpacity>
 
-            <Text style={styles.sectionTitle}>Chat</Text>
+            <Text style={styles.sectionTitle}><Trans>Chat</Trans></Text>
 
             <SwitchComponent title="Auto Scroll" value={autoScroll} onValueChange={setAutoScroll} />
-            <Text style={styles.subtitle}>Autoscrolls text during generations</Text>
+            <Text style={styles.subtitle}><Trans>Autoscrolls text during generations</Trans></Text>
 
             <SwitchComponent
                 title="Use First Message"
@@ -138,7 +142,7 @@ const AppSettingsMenu = () => {
                 onValueChange={setFirstMes}
             />
             <Text style={styles.subtitle}>
-                This will make new chats start blank, needed by specific models
+                <Trans>This will make new chats start blank, needed by specific models</Trans>
             </Text>
 
             <SwitchComponent
@@ -146,16 +150,16 @@ const AppSettingsMenu = () => {
                 value={chatOnStartup}
                 onValueChange={setChatOnStartup}
             />
-            <Text style={styles.subtitle}>Loads the most recent chat on startup</Text>
+            <Text style={styles.subtitle}><Trans>Loads the most recent chat on startup</Trans></Text>
 
             <SwitchComponent
                 title="Send on Enter"
                 value={sendOnEnter}
                 onValueChange={setSendOnEnter}
             />
-            <Text style={styles.subtitle}>Submits messages when Enter is pressed</Text>
+            <Text style={styles.subtitle}><Trans>Submits messages when Enter is pressed</Trans></Text>
 
-            <Text style={styles.sectionTitle}>Generation</Text>
+            <Text style={styles.sectionTitle}><Trans>Generation</Trans></Text>
 
             <SwitchComponent
                 title="Load Local Model on Chat"
@@ -163,14 +167,14 @@ const AppSettingsMenu = () => {
                 onValueChange={setAutoloadLocal}
             />
             <Text style={styles.subtitle}>
-                Automatically loads most recently used local model when chatting
+                <Trans>Automatically loads most recently used local model when chatting</Trans>
             </Text>
 
             <SwitchComponent title="Save Local KV" value={saveKV} onValueChange={setSaveKV} />
             <Text style={styles.subtitle}>
-                Saves the KV cache on generations, allowing you to continue sessions after closing
-                the app. You must use the same model for this to function properly. Be warned that
-                the KV cache file may be very big and negatively impact battery life!
+                <Trans>Saves the KV cache on generations, allowing you to continue sessions after closing the app. </Trans> 
+                <Trans>You must use the same model for this to function properly. </Trans> 
+                <Trans>Be warned that the KV cache file may be very big and negatively impact battery life!</Trans>
             </Text>
 
             <SwitchComponent
@@ -178,35 +182,39 @@ const AppSettingsMenu = () => {
                 value={printContext}
                 onValueChange={setPrintContext}
             />
-            <Text style={styles.subtitle}>Prints the generation context to logs for debugging</Text>
+            <Text style={styles.subtitle}><Trans>Prints the generation context to logs for debugging</Trans></Text>
 
-            <Text style={styles.sectionTitle}>Character Management</Text>
+            <Text style={styles.sectionTitle}><Trans>Character Management</Trans></Text>
             <TouchableOpacity
                 style={styles.button}
                 onPress={() => {
                     WarningAlert(
-                        `Regenerate Default Card`,
-                        `This will add the default AI Bot card to your character list.`,
+                        t(`Regenerate Default Card`),
+                        t(`This will add the default AI Bot card to your character list.`),
+                        t('Cancel'),
+                        t('Confirm'),
                         Characters.createDefaultCard
                     )
                 }}>
-                <Text style={styles.buttonText}>Regenerate Default Card</Text>
+                <Text style={styles.buttonText}><Trans>Regenerate Default Card</Trans></Text>
             </TouchableOpacity>
 
-            <Text style={styles.sectionTitle}>Database Management</Text>
+            <Text style={styles.sectionTitle}><Trans>Database Management</Trans></Text>
             <Text style={styles.subtitle}>
-                WARNING: only import if you are certain it's from the same version!
+                <Trans>WARNING: only import if you are certain it's from the same version!</Trans>
             </Text>
             <TouchableOpacity
                 style={styles.button}
                 onPress={() => {
                     WarningAlert(
-                        `Export Database`,
-                        `Are you sure you want to export the database file?\n\nIt will automatically be downloaded to Downloads`,
+                        t(`Export Database`),
+                        t(`Are you sure you want to export the database file?\n\nIt will automatically be downloaded to Downloads`),
+                        t('Cancel'),
+                        t('Confirm'),
                         exportDB
                     )
                 }}>
-                <Text style={styles.buttonText}>Export Database</Text>
+                <Text style={styles.buttonText}><Trans>Export Database</Trans></Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -215,13 +223,22 @@ const AppSettingsMenu = () => {
                     getDocumentAsync({ type: ['application/*'] }).then(async (result) => {
                         if (result.canceled) return
                         WarningAlert(
-                            `Import Database`,
-                            `Are you sure you want to import this database? This may will destroy the current database!\n\nA backup will automatically be downloaded.\n\nApp will restart automatically`,
-                            () => importDB(result.assets[0].uri, result.assets[0].name)
+                            t(`Import Database`),
+                            t(`Are you sure you want to import this database? This may will destroy the current database!\n\nA backup will automatically be downloaded.\n\nApp will restart automatically`),
+                            t('Cancel'),
+                            t('Confirm'),
+                            () => importDB(
+                                result.assets[0].uri, 
+                                result.assets[0].name,
+                                t('WARNING: Different Version'),
+                                t("The imported database file has a different app version (${dbAppVersion}) than installed (${appVersion}), this may break or corrupt the database. It is recommended to use the same app version."),
+                                t('Cancel'),
+                                t('Confirm') 
+                            )
                         )
                     })
                 }}>
-                <Text style={styles.buttonText}>Import Database</Text>
+                <Text style={styles.buttonText}><Trans>Import Database</Trans></Text>
             </TouchableOpacity>
             <View style={{ paddingVertical: 60 }} />
         </ScrollView>

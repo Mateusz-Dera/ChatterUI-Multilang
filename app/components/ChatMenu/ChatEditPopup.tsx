@@ -12,6 +12,7 @@ import {
     MenuTrigger,
     renderers,
 } from 'react-native-popup-menu'
+import { useTranslation } from 'react-i18next'
 
 const { Popover } = renderers
 
@@ -72,6 +73,8 @@ const ChatEditPopup: React.FC<ChatEditPopupProps> = ({ item, setNowLoading, nowL
         unloadChat: state.reset,
     }))
 
+    const { t } = useTranslation('myNamespace')
+
     const handleDeleteChat = () => {
         Alert.alert(
             `Delete Character`,
@@ -103,7 +106,7 @@ const ChatEditPopup: React.FC<ChatEditPopupProps> = ({ item, setNowLoading, nowL
 
     const handleCloneChat = () => {
         Alert.alert(
-            `Clone Character`,
+            t(`Clone Character`),
             `Are you sure you want to clone '${item.name}'?`,
             [
                 { text: 'Cancel', onPress: () => {}, style: 'cancel' },

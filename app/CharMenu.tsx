@@ -18,6 +18,9 @@ import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 import { runOnJS } from 'react-native-reanimated'
 import { useShallow } from 'zustand/react/shallow'
 
+import React from 'react';
+import { Trans } from 'react-i18next'
+
 type CharInfo = {
     name: string
     id: number
@@ -178,7 +181,7 @@ const CharMenu = () => {
                                 fontStyle: 'italic',
                                 fontSize: 16,
                             }}>
-                            No Characters Found. Try Importing Some!
+                            <Trans>No Characters Found. Try Importing Some!</Trans>
                         </Text>
                     </View>
                 )}

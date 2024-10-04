@@ -20,7 +20,11 @@ import { SafeAreaView, Text, StyleSheet, View, ScrollView } from 'react-native'
 import { Dropdown } from 'react-native-element-dropdown'
 import { useMMKVString } from 'react-native-mmkv'
 
+import React from 'react'
+import { Trans } from 'react-i18next'
+
 const APIMenu = () => {
+    
     const [APIType, setAPIType] = useMMKVString(Global.APIType)
     const apinames = [
         { label: 'Local', value: API.LOCAL },
@@ -63,7 +67,7 @@ const APIMenu = () => {
                                 fontSize: 16,
                                 marginBottom: 8,
                             }}>
-                            API Type
+                            <Trans>API Type</Trans>
                         </Text>
                         <Dropdown
                             value={APIType}

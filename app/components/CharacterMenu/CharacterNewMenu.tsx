@@ -15,6 +15,9 @@ import {
 import Animated, { ZoomIn } from 'react-native-reanimated'
 import { useShallow } from 'zustand/react/shallow'
 
+import React from 'react'
+import { Trans } from 'react-i18next'
+
 const { Popover } = renderers
 
 type CharacterNewMenuProps = {
@@ -35,7 +38,7 @@ const PopupOption: React.FC<PopupProps> = ({ onPress, label, iconName }) => {
         <MenuOption>
             <TouchableOpacity style={styles.popupButton} onPress={onPress}>
                 <AntDesign name={iconName} size={28} color={Style.getColor('primary-text2')} />
-                <Text style={styles.optionLabel}>{label}</Text>
+                <Text style={styles.optionLabel}><Trans>{label}</Trans></Text>
             </TouchableOpacity>
         </MenuOption>
     )
@@ -47,6 +50,7 @@ const CharacterNewMenu: React.FC<CharacterNewMenuProps> = ({
     showMenu,
     setShowMenu,
 }) => {
+    
     const menuRef: React.MutableRefObject<Menu | null> = useRef(null)
 
     const backAction = () => {

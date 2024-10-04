@@ -15,6 +15,9 @@ import {
 } from 'react-native'
 import { useShallow } from 'zustand/react/shallow'
 
+import React from 'react'
+import { Trans } from 'react-i18next'
+
 const UserInfo = () => {
     const router = useRouter()
 
@@ -105,7 +108,7 @@ const UserInfo = () => {
                 </View>
             </View>
             <View style={styles.inputarea}>
-                <Text style={{ color: Style.getColor('primary-text2') }}>Description</Text>
+                <Text style={{ color: Style.getColor('primary-text2') }}><Trans>Description</Trans></Text>
                 <TextInput
                     style={styles.input}
                     multiline

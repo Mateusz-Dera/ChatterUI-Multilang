@@ -6,6 +6,9 @@ import { Dropdown } from 'react-native-element-dropdown'
 import { useMMKVBoolean, useMMKVObject, useMMKVString } from 'react-native-mmkv'
 import * as Progress from 'react-native-progress'
 
+import React from 'react'
+import { Trans } from 'react-i18next'
+
 import { SliderItem } from '..'
 
 type CPUFeatures = {
@@ -139,10 +142,10 @@ const Local = () => {
                     flexDirection: 'row',
                 }}>
                 <Text style={styles.subtitle} ellipsizeMode="tail">
-                    Loaded Model :{' '}
+                    <Trans>Loaded Model :</Trans>{' '}
                 </Text>
                 <Text style={{ ...styles.subtitle, color: Style.getColor('primary-text1') }}>
-                    {modelName ? modelName : 'None'}
+                    {modelName || <Trans>None</Trans>}
                 </Text>
             </View>
 
@@ -219,7 +222,7 @@ const Local = () => {
                             style={{
                                 ...(disableLoad ? styles.disablebuttonlabel : styles.buttonlabel),
                             }}>
-                            Load
+                            <Trans>Load</Trans>
                         </Text>
                     </TouchableOpacity>
 
@@ -234,7 +237,7 @@ const Local = () => {
                             style={{
                                 ...(disableUnload ? styles.disablebuttonlabel : styles.buttonlabel),
                             }}>
-                            Unload
+                            <Trans>Unload</Trans>
                         </Text>
                     </TouchableOpacity>
 
@@ -249,14 +252,14 @@ const Local = () => {
                             style={{
                                 ...(disableDelete ? styles.disablebuttonlabel : styles.buttonlabel),
                             }}>
-                            Delete
+                            <Trans>Delete</Trans>
                         </Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
                         style={{ ...styles.textbutton, marginRight: 8 }}
                         onPress={handleImport}>
-                        <Text style={styles.buttonlabel}>Import Model</Text>
+                        <Text style={styles.buttonlabel}><Trans>Import Model</Trans></Text>
                     </TouchableOpacity>
                 </View>
             )}

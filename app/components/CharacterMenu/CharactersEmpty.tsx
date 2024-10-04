@@ -2,6 +2,9 @@ import { Ionicons } from '@expo/vector-icons'
 import { Style } from '@globals'
 import { View, Text } from 'react-native'
 
+import React from 'react';
+import { Trans } from 'react-i18next'
+
 const CharactersEmpty = () => {
     return (
         <View
@@ -20,7 +23,7 @@ const CharactersEmpty = () => {
                     fontStyle: 'italic',
                     fontSize: 16,
                 }}>
-                No Characters Found. Try Importing Some!
+                <Trans>No Characters Found. Try Importing Some!</Trans>
             </Text>
         </View>
     )

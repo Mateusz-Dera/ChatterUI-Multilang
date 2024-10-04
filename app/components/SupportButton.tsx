@@ -2,6 +2,7 @@ import { FontAwesome } from '@expo/vector-icons'
 import { Style } from '@globals'
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, Linking } from 'react-native'
+import { Trans } from 'react-i18next'
 
 const SupportButton = () => {
     return (
@@ -10,7 +11,7 @@ const SupportButton = () => {
                 Linking.openURL('https://ko-fi.com/vali98')
             }}
             style={styles.supportButton}>
-            <Text style={styles.supportText}>Support ChatterUI</Text>
+            <Text style={styles.supportText}><Trans>Support ChatterUI</Trans></Text>
             <FontAwesome name="coffee" size={16} color={Style.getColor('primary-text1')} />
         </TouchableOpacity>
     )

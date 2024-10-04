@@ -15,7 +15,11 @@ import ChatsDrawer from './ChatsDrawer'
 import OptionsMenu from './OptionsMenu'
 import SettingsDrawer from './SettingsDrawer'
 
+import React from 'react';
+import { Trans } from 'react-i18next'
+
 const ChatMenu = () => {
+
     const router = useRouter()
     const { unloadCharacter } = Characters.useCharacterCard(
         useShallow((state) => ({

@@ -12,6 +12,7 @@ import {
     MenuTrigger,
     renderers,
 } from 'react-native-popup-menu'
+import { Trans } from 'react-i18next'
 
 const { Popover } = renderers
 
@@ -39,7 +40,7 @@ const PopupOption: React.FC<PopupProps> = ({ onPress, label, iconName, warning =
                     color={Style.getColor(warning ? 'destructive-brand' : 'primary-text2')}
                 />
                 <Text style={warning ? styles.optionLabelWarning : styles.optionLabel}>
-                    {label}
+                    <Trans>{label}</Trans>
                 </Text>
             </TouchableOpacity>
         </MenuOption>

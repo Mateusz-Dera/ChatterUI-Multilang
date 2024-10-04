@@ -4,6 +4,9 @@ import { View, Text, Image, StyleSheet, TouchableOpacity, ActivityIndicator } fr
 
 import CharacterEditPopup from './CharacterEditPopup'
 
+import React from 'react';
+import { Trans } from 'react-i18next'
+
 type CharacterListingProps = {
     index: number
     character: CharInfo
@@ -82,7 +85,7 @@ const CharacterListing: React.FC<CharacterListingProps> = ({
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                         <Text style={styles.nametag}>{character.name}</Text>
                         <Text style={styles.timestamp}>
-                            {getTimeStamp(character.last_modified)}
+                            <Trans>{getTimeStamp(character.last_modified)}</Trans>
                         </Text>
                     </View>
                     {character.latestSwipe && (

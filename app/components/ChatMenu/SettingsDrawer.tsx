@@ -2,7 +2,6 @@ import SupportButton from '@components/SupportButton'
 import { AppSettings } from '@constants/GlobalValues'
 import { AntDesign, FontAwesome } from '@expo/vector-icons'
 import { Characters, Style } from '@globals'
-import appConfig from 'app.config'
 import { useRouter } from 'expo-router'
 import { SetStateAction, useEffect, useState } from 'react'
 import {
@@ -22,6 +21,9 @@ import Animated, {
     FadeOut,
 } from 'react-native-reanimated'
 import { useShallow } from 'zustand/react/shallow'
+
+import React from 'react'
+import { Trans, useTranslation } from 'react-i18next'
 
 type SettingsDrawerProps = {
     booleans: [boolean, (b: boolean | SetStateAction<boolean>) => void]
@@ -89,6 +91,9 @@ type DrawerButtonProps = {
 }
 
 const SettingsDrawer: React.FC<SettingsDrawerProps> = ({ booleans: [showModal, setShowModal] }) => {
+
+    const { t } = useTranslation('myNamespace');
+
     const router = useRouter()
     const { userName, imageID } = Characters.useUserCard(
         useShallow((state) => ({
@@ -137,7 +142,8 @@ const SettingsDrawer: React.FC<SettingsDrawerProps> = ({ booleans: [showModal, s
                     name={item.icon ?? 'question'}
                     color={Style.getColor('primary-text2')}
                 />
-                <Text style={styles.largeButtonText}>{item.name}</Text>
+                {/* <Text style={styles.largeButtonText}>{item.name}</Text> */}
+                <Text style={styles.largeButtonText}><Trans>{item.name}</Trans></Text>
             </TouchableOpacity>
         </Animated.View>
     )
@@ -217,7 +223,7 @@ const SettingsDrawer: React.FC<SettingsDrawerProps> = ({ booleans: [showModal, s
                                 }}>
                                 {__DEV__ && 'DEV BUILD\t'}
                                 {devMode && 'DEV MODE\t'}
-                                {'v' + appConfig.expo.version}
+                                {'v' + require(`../../../app.json`).expo.version}
                             </Text>
                         </View>
                         <SupportButton />

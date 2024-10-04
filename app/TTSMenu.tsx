@@ -7,6 +7,8 @@ import { useEffect, useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View, Switch } from 'react-native'
 import { Dropdown } from 'react-native-element-dropdown'
 import { useMMKVBoolean, useMMKVObject } from 'react-native-mmkv'
+import React from 'react'
+import { Trans } from 'react-i18next'
 
 function groupBy(array: any[], key: string) {
     if (array.length === 0) return []
@@ -51,7 +53,7 @@ const TTSMenu = () => {
             <View style={styles.mainContainer}>
                 <Stack.Screen options={{ title: 'TTS', animation: 'fade' }} />
                 <View style={styles.enableContainer}>
-                    <Text style={{ ...styles.title }}>Enable</Text>
+                    <Text style={{ ...styles.title }}><Trans>Enable</Trans></Text>
                     <Switch
                         trackColor={{
                             false: Style.getColor('primary-surface1'),
@@ -75,7 +77,7 @@ const TTSMenu = () => {
                 {enableTTS && (
                     <View>
                         <View style={styles.enableContainer}>
-                            <Text style={{ ...styles.title }}>Automatically TTS On Inference</Text>
+                            <Text style={{ ...styles.title }}><Trans>Automatically TTS On Inference</Trans></Text>
                             <Switch
                                 trackColor={{
                                     false: Style.getColor('primary-surface1'),
@@ -93,9 +95,9 @@ const TTSMenu = () => {
                                 value={autoTTS}
                             />
                         </View>
-                        <Text style={{ ...styles.title, marginTop: 8 }}>Language</Text>
+                        <Text style={{ ...styles.title, marginTop: 8 }}><Trans>Language</Trans></Text>
                         <Text style={styles.subtitle}>
-                            Languages: {Object.keys(languageList).length}
+                            <Trans>Languages: </Trans> {Object.keys(languageList).length}
                         </Text>
                         <View style={{ marginTop: 8 }}>
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -120,9 +122,9 @@ const TTSMenu = () => {
                             </View>
                         </View>
 
-                        <Text style={{ ...styles.title, marginTop: 8 }}>Speaker</Text>
+                        <Text style={{ ...styles.title, marginTop: 8 }}><Trans>Speaker</Trans></Text>
                         <Text style={styles.subtitle}>
-                            Speakers: {modelList.filter((item) => item.language === lang).length}
+                        <Trans>Speakers: </Trans>{modelList.filter((item) => item.language === lang).length}
                         </Text>
 
                         <View style={{ marginTop: 8, marginBottom: 16, flexDirection: 'row' }}>
@@ -156,9 +158,9 @@ const TTSMenu = () => {
                                     marginRight: 16,
                                     paddingHorizontal: 12,
                                 }}>
-                                <Text style={styles.buttonlabel}>Test</Text>
+                                <Text style={styles.buttonlabel}><Trans>Test</Trans></Text>
                             </TouchableOpacity>
-                            <Text style={styles.subtitle}>"This is a test audio."</Text>
+                            <Text style={styles.subtitle}>"<Trans>This is a test audio.</Trans>"</Text>
                         </View>
                     </View>
                 )}
