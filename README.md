@@ -1,3 +1,5 @@
+App translation - work in progress
+
 # ChatterUI - A simple app for LLMs
 
 ChatterUI is a native mobile frontend for managing chat files and character cards inspired by SillyTavern.
