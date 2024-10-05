@@ -5,6 +5,7 @@ import { Global, Style } from '@globals'
 import { useLiveQuery } from 'drizzle-orm/expo-sqlite'
 import { Stack } from 'expo-router'
 import React, { useState } from 'react'
+import { Trans } from 'react-i18next'
 import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import { useMMKVObject } from 'react-native-mmkv'
@@ -58,7 +59,7 @@ const ModelInfo = () => {
                         {item.architecture}
                     </Text>
                 </View>
-                <Text style={styles.subtitle}>Context Length: {item.context_length}</Text>
+                <Text style={styles.subtitle}><Trans>Context Length: </Trans>{item.context_length}</Text>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity>
                         <AntDesign
@@ -101,7 +102,7 @@ const ModelInfo = () => {
                     entering={SlideInLeft.easing(Easing.inOut(Easing.cubic))}
                     exiting={SlideOutLeft.easing(Easing.inOut(Easing.cubic))}>
                     <View style={{ marginBottom: 16 }}>
-                        <Text style={styles.title}>Supported Quantizations:</Text>
+                        <Text style={styles.title}><Trans>Supported Quantizations:</Trans></Text>
                         <View
                             style={{
                                 flexDirection: 'row',
@@ -109,10 +110,10 @@ const ModelInfo = () => {
                                 marginTop: 8,
                             }}>
                             <Text style={cpuFeatures?.dotprod ? styles.greenTag : styles.redTag}>
-                                Q4_0_4_4 {!cpuFeatures?.dotprod && 'Not '}Available
+                                Q4_0_4_4 <Trans>{cpuFeatures?.dotprod ? 'Available' : 'Not Available'}</Trans>
                             </Text>
                             <Text style={cpuFeatures?.i8mm ? styles.greenTag : styles.redTag}>
-                                Q4_0_4_8 {!cpuFeatures?.i8mm && 'Not '}Available
+                                Q4_0_4_8 <Trans>{cpuFeatures?.i8mm ? 'Available' : 'Not Available'}</Trans>
                             </Text>
                         </View>
                     </View>
@@ -180,7 +181,7 @@ const ModelInfo = () => {
             <TouchableOpacity
                 style={styles.settingsButton}
                 onPress={() => setShowSettings(!showSettings)}>
-                <Text>{showSettings ? 'Back To Models' : 'Show Settings'}</Text>
+                <Text><Trans>{showSettings ? 'Back To Models' : 'Show Settings'}</Trans></Text>
             </TouchableOpacity>
         </View>
     )

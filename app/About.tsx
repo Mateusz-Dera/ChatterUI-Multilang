@@ -54,17 +54,17 @@ const About = () => {
                 </TouchableOpacity>
             )}
             <Text style={styles.body}>
-                ChatterUI is a free and open-source application developed by Vali98
+                <Trans>ChatterUI is a free and open-source application developed by Vali98</Trans>
             </Text>
             <Text style={{ marginBottom: 20, ...styles.body }}>
-                This app is a passion project I develop in my free time. If you're enjoying the app,
-                consider supporting its development!
+                <Trans>This app is a passion project I develop in my free time. </Trans>
+                <Trans>If you're enjoying the app, consider supporting its development!</Trans>
             </Text>
-            <Text style={{ ...styles.body, marginBottom: 8 }}>Donate to ChatterUI here:</Text>
+            <Text style={{ ...styles.body, marginBottom: 8 }}><Trans>Donate to ChatterUI here:</Trans></Text>
             <SupportButton />
-            <Text style={styles.body}>Got an issue? Report it here:</Text>
+            <Text style={styles.body}><Trans>Got an issue? Report it here:</Trans></Text>
 
-            <Text style={styles.subtitleText}>(Don't forget to add your Logs!)</Text>
+            <Text style={styles.subtitleText}><Trans>(Don't forget to add your Logs!)</Trans></Text>
             <TouchableOpacity
                 onPress={() => {
                     Linking.openURL('https://github.com/Vali-98/ChatterUI')
