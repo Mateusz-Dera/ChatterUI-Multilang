@@ -1,6 +1,7 @@
 import { rawdb } from '@db'
 import { copyFile, DocumentDirectoryPath, DownloadDirectoryPath } from '@dr.pogodin/react-native-fs'
 import { Style, AppSettings, Logger, Characters } from '@globals'
+import appConfig from 'app.config'
 import { reloadAppAsync } from 'expo'
 import { getDocumentAsync } from 'expo-document-picker'
 import { documentDirectory, copyAsync, deleteAsync } from 'expo-file-system'
@@ -10,7 +11,7 @@ import { StyleSheet, Text, View, Switch, TouchableOpacity, Alert, ScrollView } f
 import { useMMKVBoolean } from 'react-native-mmkv'
 import { Trans, useTranslation } from 'react-i18next'
 
-const appVersion = `${require(`../app.json`).expo.version}`
+const appVersion = appConfig.expo.version
 
 type SwitchComponentProps = {
     title: string
