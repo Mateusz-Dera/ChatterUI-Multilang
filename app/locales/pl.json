@@ -74,5 +74,6 @@
     "Test": "Test",
     "This is a test audio.": "To jest test audio.",
     "Speaker": "Głosy",
-    "Speakers: ": "Dostępne warianty: "
+    "Speakers: ": "Dostępne warianty: ",
+    "Github Repository": "Repozytorium Github"
 }

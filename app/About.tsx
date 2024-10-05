@@ -6,6 +6,7 @@ import { Stack } from 'expo-router'
 import React, { useState } from 'react'
 import { View, Image, Text, StyleSheet, Linking, TouchableOpacity } from 'react-native'
 import { useMMKVBoolean } from 'react-native-mmkv'
+import { Trans } from 'react-i18next'
 
 const About = () => {
     const [counter, setCounter] = useState<number>(0)
@@ -68,7 +69,7 @@ const About = () => {
                     Linking.openURL('https://github.com/Vali-98/ChatterUI')
                 }}
                 style={styles.supportButton}>
-                <Text style={styles.supportText}>Github Repository</Text>
+                <Text style={styles.supportText}><Trans>Github Repository</Trans></Text>
                 <FontAwesome name="github" size={20} color={Style.getColor('primary-text1')} />
             </TouchableOpacity>
         </View>
