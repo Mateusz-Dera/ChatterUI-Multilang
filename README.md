@@ -1,3 +1,5 @@
+## Application translation fork. Work in progress.
+
 # ChatterUI - A simple app for LLMs
 
 ChatterUI is a native mobile frontend for LLMs.

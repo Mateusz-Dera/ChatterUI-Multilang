@@ -1,3 +1,13 @@
 {
-    
+    "TTS": "Tekst na mowę",
+    "Select Language": "Wybierz język",
+    "Select Speaker": "Wybierz głos",
+    "This is a test audio.": "To jest nagranie testowe.",
+    "Test": "Test",
+    "Enable": "Włącz",
+    "Automatically TTS On Inference": "Automatyczna zamiana tekstu na mowę",
+    "Language": "Język",
+    "Languages": "Języki",
+    "Speaker": "Głos",
+    "Speakers": "Dostępne głosy"
 }
