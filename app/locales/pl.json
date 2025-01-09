@@ -9,5 +9,15 @@
     "Language": "Język",
     "Languages": "Języki",
     "Speaker": "Głos",
-    "Speakers": "Dostępne głosy"
+    "Speakers": "Dostępne głosy",
+    "About": "O aplikacji",
+    "Version": "Wersja",
+    "ChatterUI is a free and open-source application developed by Vali98": "ChatterUI to darmowa i otwarta autorstwa Vali98",
+    "This app is a passion project I develop in my free time. If you're enjoying the app, consider supporting its development!": "Aplikacja jest projektem realizowanym w wolnym czasie. Jeśli podoba Ci się aplikacja, rozważ wsparcie jej rozwoju!",
+    "Donate to ChatterUI here": "Wesprzyj ChatterUI tutaj",
+    "Got an issue? Report it here": "Znalazłeś błąd? Zgłoś go tutaj",
+    "Don't forget to add your Logs!": "Nie zapomnij załączyć logów!",
+    "Github Repository": "Repozytorium Github",
+    "Disable Dev Mode": "Wyłącz tryb deweloperski",
+    "Support ChatterUI": "Wesprzyj ChatterUI"
 }

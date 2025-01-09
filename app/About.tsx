@@ -7,14 +7,17 @@ import { Stack } from 'expo-router'
 import React, { useState } from 'react'
 import { Image, Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { useMMKVBoolean } from 'react-native-mmkv'
+import { useTranslation, Trans } from 'react-i18next';
 
 const About = () => {
+    const { t } = useTranslation();
     const [counter, setCounter] = useState<number>(0)
     const [devMode, setDevMode] = useMMKVBoolean(AppSettings.DevMode)
 
     const updateCounter = () => {
         if (devMode) return
         if (counter === 6) {
+            // Logs are not translated
             Logger.log(`You have enabled dev mode.`, true)
             setDevMode(true)
         }
@@ -26,7 +29,7 @@ const About = () => {
         <View style={styles.container}>
             <Stack.Screen
                 options={{
-                    title: 'About',
+                    title: t('About'),
                     animation: 'fade',
                 }}
             />
@@ -35,7 +38,7 @@ const About = () => {
             </TouchableOpacity>
             <Text style={styles.titleText}>ChatterUI</Text>
             <Text style={styles.subtitleText}>
-                Version {version} {devMode && '[DEV MODE]'}
+                <Trans>Version</Trans> {version} {devMode && '[DEV MODE]'}
             </Text>
             {devMode && (
                 <TouchableOpacity
@@ -47,29 +50,29 @@ const About = () => {
                     onPress={() => {
                         setCounter(0)
                         setDevMode(false)
+                        // Logs are not translated
                         Logger.log('Dev mode disabled')
                     }}>
-                    <Text style={styles.supportText}>Disable Dev Mode</Text>
+                    <Text style={styles.supportText}><Trans>Disable Dev Mode</Trans></Text>
                 </TouchableOpacity>
             )}
             <Text style={styles.body}>
-                ChatterUI is a free and open-source application developed by Vali98
+                <Trans>ChatterUI is a free and open-source application developed by Vali98</Trans>
             </Text>
             <Text style={{ marginBottom: 20, ...styles.body }}>
-                This app is a passion project I develop in my free time. If you're enjoying the app,
-                consider supporting its development!
+                <Trans>This app is a passion project I develop in my free time. If you're enjoying the app, consider supporting its development!</Trans>
             </Text>
-            <Text style={{ ...styles.body, marginBottom: 8 }}>Donate to ChatterUI here:</Text>
+            <Text style={{ ...styles.body, marginBottom: 8 }}><Trans>Donate to ChatterUI here</Trans>:</Text>
             <SupportButton />
-            <Text style={styles.body}>Got an issue? Report it here:</Text>
+            <Text style={styles.body}><Trans>Got an issue? Report it here</Trans>:</Text>
 
-            <Text style={styles.subtitleText}>(Don't forget to add your Logs!)</Text>
+            <Text style={styles.subtitleText}>(<Trans>Don't forget to add your Logs!</Trans>)</Text>
             <TouchableOpacity
                 onPress={() => {
                     Linking.openURL('https://github.com/Vali-98/ChatterUI')
                 }}
                 style={styles.supportButton}>
-                <Text style={styles.supportText}>Github Repository</Text>
+                <Text style={styles.supportText}><Trans>Github Repository</Trans></Text>
                 <FontAwesome name="github" size={20} color={Style.getColor('primary-text1')} />
             </TouchableOpacity>
         </View>

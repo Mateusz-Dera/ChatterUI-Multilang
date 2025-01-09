@@ -26,7 +26,7 @@ type LanguageListItem = {
 }
 
 const TTSMenu = () => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const [currentSpeaker, setCurrentSpeaker] = useMMKVObject<Speech.Voice>(Global.TTSSpeaker)
     const [enableTTS, setEnableTTS] = useMMKVBoolean(Global.TTSEnable)
     const [autoTTS, setAutoTTS] = useMMKVBoolean(Global.TTSAuto)
