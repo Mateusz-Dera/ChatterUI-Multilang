@@ -6,8 +6,10 @@ import { Global, Logger, Style, saveStringToDownload } from 'constants/Global'
 import { Stack } from 'expo-router'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { useMMKVObject } from 'react-native-mmkv'
+import { useTranslation, Trans } from 'react-i18next';
 
 const Logs = () => {
+    const { t } = useTranslation();
     const [logs, setLogs] = useMMKVObject<string[]>(Global.Logs)
 
     const logitems = logs?.reverse().map((item, index) => ({ entry: item, key: index })) ?? []
@@ -17,21 +19,21 @@ const Logs = () => {
         const data = logs.toReversed().join('\n')
         saveStringToDownload(data, 'logs.txt', 'utf8')
             .then(() => {
-                Logger.log('Logs Downloaded!', true)
+                Logger.log(t('Logs Downloaded!'), true)
             })
             .catch((e) => {
-                Logger.log(`Could Not Export Logs: ${e}`, true)
+                Logger.log(t('Could Not Export Logs') + ': ${e}', true)
             })
     }
 
     const handleFlushLogs = () => {
         Alert.alert({
-            title: `Delete Logs`,
-            description: `Are you sure you want to delete all logs? This cannot be undone.`,
+            title: t('Delete Logs'),
+            description: t('Are you sure you want to delete all logs? This cannot be undone.'),
             buttons: [
-                { label: 'Cancel' },
+                { label: t('Cancel') },
                 {
-                    label: 'Delete Logs',
+                    label: t('Delete Logs'),
                     onPress: async () => {
                         Logger.flushLogs()
                     },

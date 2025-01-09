@@ -17,8 +17,7 @@ const About = () => {
     const updateCounter = () => {
         if (devMode) return
         if (counter === 6) {
-            // Logs are not translated
-            Logger.log(`You have enabled dev mode.`, true)
+            Logger.log(t('You have enabled dev mode.'), true)
             setDevMode(true)
         }
         setCounter(counter + 1)
@@ -38,7 +37,7 @@ const About = () => {
             </TouchableOpacity>
             <Text style={styles.titleText}>ChatterUI</Text>
             <Text style={styles.subtitleText}>
-                <Trans>Version</Trans> {version} {devMode && '[DEV MODE]'}
+                <Trans>Version</Trans> {version} {devMode && '[' + t('DEV MODE' + ']')}
             </Text>
             {devMode && (
                 <TouchableOpacity
@@ -50,8 +49,7 @@ const About = () => {
                     onPress={() => {
                         setCounter(0)
                         setDevMode(false)
-                        // Logs are not translated
-                        Logger.log('Dev mode disabled')
+                        Logger.log(t('Dev mode disabled'))
                     }}>
                     <Text style={styles.supportText}><Trans>Disable Dev Mode</Trans></Text>
                 </TouchableOpacity>
