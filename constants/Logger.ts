@@ -2,6 +2,47 @@ import Toast from 'react-native-simple-toast'
 
 import { AppSettings, Global } from './GlobalValues'
 import { mmkv } from './MMKV'
+import i18next from 'i18next';
+import { initReactI18next } from 'react-i18next';
+
+import getSystemLanguage from "../app/language-utils";
+
+import translationEN from "../app/locales/en.json";
+import translationPL from "../app/locales/pl.json";
+
+// Define the type for the resources object
+const resources = {
+  en: {
+    translation: translationEN,
+  },
+  pl: {
+    translation: translationPL,
+  },
+} as const; // `as const` ensures the keys are readonly literals
+
+type LanguageKeys = keyof typeof resources; // Extract valid keys from resources
+
+// Type guard to validate if a string is a valid key
+function isLanguageKey(key: string): key is LanguageKeys {
+  return key in resources;
+}
+
+const systemLanguage = getSystemLanguage();
+const fallbackLanguage: LanguageKeys = "en"; // Define fallback language
+
+// Validate the system language
+const selectedLanguage = isLanguageKey(systemLanguage) ? systemLanguage : fallbackLanguage;
+
+// Initialize i18next
+i18next
+  .use(initReactI18next)
+  .init({
+    resources,
+    lng: selectedLanguage, // Use validated language or fallback
+    interpolation: {
+      escapeValue: false, // React already escapes values
+    }
+  });
 
 export namespace Logger {
     const toastTime = 2000
@@ -40,10 +81,16 @@ export namespace Logger {
     }
 
     export const log = (data: string, toast: boolean = false, toastTime: number = 2000) => {
-        const timestamped = `[${new Date().toTimeString().substring(0, 8)}] : ${data}`
-        console.log(timestamped)
-        insertToLogs(timestamped)
-        if (toast) Toast.show(data, toastTime)
+        const translatedMessage = i18next.exists(data.split(":")[0]) ? i18next.t(data.split(":")[0]) : data;
+        const timestamped = `[${new Date().toTimeString().substring(0, 8)}] : ${data}`;
+        console.log(timestamped);
+        insertToLogs(timestamped);
+        if (data.split(":").length > 1){
+            if (toast) Toast.show(`${translatedMessage}${data.substring(data.split(":")[0].length,data.length)}`, toastTime);
+        }
+        else{
+            if (toast) Toast.show(translatedMessage, toastTime);
+        }
     }
 
     export const debug = (data: string) => {

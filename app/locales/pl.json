@@ -24,10 +24,15 @@
     "Delete Logs": "Usuń logi",
     "Are you sure you want to delete all logs? This cannot be undone.": "Czy na pewno chcesz usunąć wszystkie logi? Tej operacji nie można cofnąć.",
     "Cancel": "Anuluj",
-    "Logs Downloaded!": "Logi pobrane!",
+    "Logs Downloaded!": "Pobrano logi!",
     "Could Not Export Logs": "Nie można wyeksportować logów",
     "No Speaker Chosen": "Nie wybrano głosu",
     "Dev mode disabled": "Wyłączono tryb deweloperski",
     "You have enabled dev mode.": "Włączono tryb deweloperski.",
-
+    "Download Successful!":"Zapisywanie zakończone sukcesem!",
+    "Failed to copy database": "Kopiowanie bazy danych nie powiodło się",
+    "Somehow the db is already deleted": "Baza danych została już usunięta",
+    "Copy Successful, Restarting now.": "Ukończono kopiowanie, restartuję.",
+    "Failed to import database": "Nie udało się zaimportować bazy danych",
+    "Logs": "Logi"
 }

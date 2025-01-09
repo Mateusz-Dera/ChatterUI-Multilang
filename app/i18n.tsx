@@ -36,7 +36,7 @@ i18n
     lng: selectedLanguage, // Use validated language or fallback
     interpolation: {
       escapeValue: false, // React already escapes values
-    },
+    }
   });
 
 export default i18n;

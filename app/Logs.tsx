@@ -6,7 +6,9 @@ import { Global, Logger, Style, saveStringToDownload } from 'constants/Global'
 import { Stack } from 'expo-router'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { useMMKVObject } from 'react-native-mmkv'
-import { useTranslation, Trans } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
+
+// TODO separate error message
 
 const Logs = () => {
     const { t } = useTranslation();
@@ -19,10 +21,12 @@ const Logs = () => {
         const data = logs.toReversed().join('\n')
         saveStringToDownload(data, 'logs.txt', 'utf8')
             .then(() => {
-                Logger.log(t('Logs Downloaded!'), true)
+                // Translated
+                Logger.log('Logs Downloaded!', true)
             })
             .catch((e) => {
-                Logger.log(t('Could Not Export Logs') + ': ${e}', true)
+                // Transtated
+                Logger.log(`Could Not Export Logs: ${e}`, true)
             })
     }
 

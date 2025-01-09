@@ -15,8 +15,10 @@ import { Stack } from 'expo-router'
 import { useState } from 'react'
 import { View, SafeAreaView, TouchableOpacity, StyleSheet, ScrollView, Text } from 'react-native'
 import Markdown from 'react-native-markdown-display'
+import { useTranslation, Trans } from 'react-i18next';
 
 const Instruct = () => {
+    const { t } = useTranslation();
     const { currentInstruct, loadInstruct, setCurrentInstruct } = Instructs.useInstruct(
         (state) => ({
             currentInstruct: state.data,

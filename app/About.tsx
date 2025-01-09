@@ -17,7 +17,8 @@ const About = () => {
     const updateCounter = () => {
         if (devMode) return
         if (counter === 6) {
-            Logger.log(t('You have enabled dev mode.'), true)
+            // Translated
+            Logger.log('You have enabled dev mode.', true)
             setDevMode(true)
         }
         setCounter(counter + 1)
@@ -49,7 +50,8 @@ const About = () => {
                     onPress={() => {
                         setCounter(0)
                         setDevMode(false)
-                        Logger.log(t('Dev mode disabled'))
+                        // Translated
+                        Logger.log('Dev mode disabled')
                     }}>
                     <Text style={styles.supportText}><Trans>Disable Dev Mode</Trans></Text>
                 </TouchableOpacity>

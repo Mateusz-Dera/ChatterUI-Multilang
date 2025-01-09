@@ -21,8 +21,10 @@ const exportDB = async (notify: boolean = true) => {
         `${DownloadDirectoryPath}/${appVersion}-db-backup.db`
     )
         .then(() => {
+            // Translated
             if (notify) Logger.log('Download Successful!', true)
         })
+        // Translated
         .catch((e) => Logger.log('Failed to copy database: ' + e, true))
 }
 
@@ -30,6 +32,7 @@ const importDB = async (uri: string, name: string) => {
     const copyDB = async () => {
         await exportDB(false)
         await deleteAsync(`${documentDirectory}SQLite/db.db`).catch(() => {
+            // Translated
             Logger.debug('Somehow the db is already deleted')
         })
         await copyAsync({
@@ -37,10 +40,12 @@ const importDB = async (uri: string, name: string) => {
             to: `${documentDirectory}SQLite/db.db`,
         })
             .then(() => {
+                // Translated
                 Logger.log('Copy Successful, Restarting now.')
                 reloadAppAsync()
             })
             .catch((e) => {
+                // Translated
                 Logger.log(`Failed to import database: ${e}`, true)
             })
     }

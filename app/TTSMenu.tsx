@@ -144,7 +144,8 @@ const TTSMenu = () => {
                             <TouchableOpacity
                                 onPress={() => {
                                     if (currentSpeaker === undefined) {
-                                        Logger.log(t('No Speaker Chosen'), true)
+                                        // Translated
+                                        Logger.log('No Speaker Chosen', true)
                                         return
                                     }
                                     Speech.speak(t('This is a test audio.'), {
